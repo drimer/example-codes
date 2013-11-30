@@ -1,0 +1,10 @@
+setup.cfg
+setup.py
+verycomplexapp/__init__.py
+verycomplexapp/main.py
+verycomplexapp.egg-info/PKG-INFO
+verycomplexapp.egg-info/SOURCES.txt
+verycomplexapp.egg-info/dependency_links.txt
+verycomplexapp.egg-info/entry_points.txt
+verycomplexapp.egg-info/not-zip-safe
+verycomplexapp.egg-info/top_level.txt

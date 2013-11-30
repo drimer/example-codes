@@ -1,0 +1,11 @@
+Metadata-Version: 1.0
+Name: verycomplexapp
+Version: 0.1dev
+Summary: Maybe not so complex
+Home-page: www.albertoaj.com
+Author: Alberto Aguilera
+Author-email: drimer.aaj
+License: GPL
+Description: I was just showing off
+Keywords: python setuptools
+Platform: UNKNOWN
