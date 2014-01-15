@@ -1,17 +1,10 @@
 
-
-def sort_alphabetically(word):
-    char_list = [c for c in word]
-    char_list.sort()
-    return ''.join(char_list)
-
-
 class AnagramsSet:
     def __init__(self):
         self.anagrams = {}
 
     def add(self, word):
-        sorted_word = sort_alphabetically(word)
+        sorted_word = ''.join(sorted(word))
         # Note: I don't need to store all the words because the solution is the
         # *numbers* of sets found. I only need to store the sorted word.
         # `self.anagrams` should be a simple set containing the sorted words.
