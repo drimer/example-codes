@@ -1,7 +1,7 @@
 
 class AnagramsSet:
     def __init__(self):
-        self.anagrams = {}
+        self.anagrams = set()
 
     def add(self, word):
         sorted_word = ''.join(sorted(word))
@@ -10,9 +10,7 @@ class AnagramsSet:
         # `self.anagrams` should be a simple set containing the sorted words.
         # This way, the memory usage is much lower.
         if sorted_word not in self.anagrams:
-            self.anagrams[sorted_word] = [word]
-        else:
-            self.anagrams[sorted_word].append(word)
+            self.anagrams.add(sorted_word)
 
     def __len__(self):
         return len(self.anagrams)
