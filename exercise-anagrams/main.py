@@ -12,6 +12,10 @@ class AnagramsSet:
 
     def add(self, word):
         sorted_word = sort_alphabetically(word)
+        # Note: I don't need to store all the words because the solution is the
+        # *numbers* of sets found. I only need to store the sorted word.
+        # `self.anagrams` should be a simple set containing the sorted words.
+        # This way, the memory usage is much lower.
         if sorted_word not in self.anagrams:
             self.anagrams[sorted_word] = [word]
         else:
