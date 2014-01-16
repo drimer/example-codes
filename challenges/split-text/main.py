@@ -1,7 +1,12 @@
+import nose
 import re
 
 
 def split_lines(text, length):
+    if max([len(word) for word in text.split()]) > length:
+        raise ValueError('Careful! There is a word longer than your max '
+                         'length!')
+
     split_lines = []
     while text:
         text = text.lstrip(' ')
@@ -35,3 +40,8 @@ def test_text_of_exactly_max_length():
 def test_text_one():
     assert split_lines('This is a fairly long text', 6) == \
         ['This', 'is a', 'fairly', 'long', 'text']
+
+
+@nose.tools.raises(ValueError)
+def test_word_longer_than_max_length_fails():
+    split_lines('This is a text a extremly long word', 3)
