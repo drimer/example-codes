@@ -3,16 +3,19 @@ import re
 
 
 def split_lines(text, length):
-    if max([len(word) for word in text.split()]) > length:
-        raise ValueError('Careful! There is a word longer than your max '
-                         'length!')
-
     split_lines = []
     while text:
         text = text.lstrip(' ')
         match = re.match(r'([\w\ ]){%s}(\Z)?' % length, text)
         if match:
             line = match.group()
+
+            if (' ' not in line
+                    and text.lstrip(line) != ''
+                    and not text.lstrip(line).startswith(' ')):
+                raise ValueError('Careful! There is a word longer than your '
+                                 'max length!')
+
             if ' ' in line:
                 line = ' '.join(line.split(' ')[:-1])
         else:
