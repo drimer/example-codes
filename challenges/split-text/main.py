@@ -44,4 +44,4 @@ def test_text_one():
 
 @nose.tools.raises(ValueError)
 def test_word_longer_than_max_length_fails():
-    split_lines('This is a text a extremly long word', 3)
+    split_lines('This is a text with an extremly long word', 3)
