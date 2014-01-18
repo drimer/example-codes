@@ -1,0 +1,9 @@
+shirt
+short
+dummy
+house
+red
+pencil
+store
+better
+worst
