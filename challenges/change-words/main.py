@@ -1,7 +1,40 @@
+def can_be_consecutive(first, second):
+    different_chars = 0
+    for i, char in enumerate(first):
+        if char != second[i]:
+            different_chars += 1
+            if different_chars > 1:
+                return False
+
+    return True
 
 
 def words_sequence(start, end, dictionary='dictionary.txt'):
-    pass
+    if len(start) != len(end):
+        return []
+
+    with open(dictionary, 'r') as f:
+        language = [line.strip() for line in f.readlines()]
+
+    sequence = [start]
+    language.remove(start)
+    while language:
+        consecutive_found = False
+        for word in language:
+            if can_be_consecutive(sequence[-1], word):
+                sequence.append(word)
+                language.remove(word)
+                consecutive_found = True
+
+                if word == end:
+                    return sequence
+
+        if not consecutive_found:
+            sequence.pop()
+            if sequence == []:
+                break
+
+    return sequence
 
 
 ### Unit tests
