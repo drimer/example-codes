@@ -1,0 +1,47 @@
+\documentclass[a4paper, 11pt, oneside]{article}
+
+\usepackage[utf8]{inputenc}
+
+% Graphics
+\usepackage{tikz}
+\usetikzlibrary{arrows}
+
+%\usepackage{html}
+\usepackage{float}
+\usepackage{graphicx}
+\usepackage{amsfonts}
+\usepackage{pdfpages}
+
+\let\cleardoublepage\clearpage
+
+\usepackage{titlesec}
+
+\titleformat{\chapter}[display]
+{\normalfont\bfseries\filcenter}
+{}
+{1ex}
+{\titlerule[2pt]
+\vspace{2ex}%
+\LARGE\thechapter.  \LARGE}
+[\vspace{1ex}%
+{\titlerule[2pt]}]
+
+
+%%% DOCUMENT STARTS %%%
+
+\begin{document}
+
+% Next line includes a external pdf file
+% \includepdf[pages={1}]{Portada.pdf}
+
+\tableofcontents
+\newpage
+
+\section{First section}
+
+\subsection{First subsection}
+Blah, blah.
+
+\end{document}
+
+%%% DOCUMENT ENDS %%%
