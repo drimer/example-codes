@@ -26,3 +26,8 @@ already uses SQLite, which doesn't require any complex setup.
 
 7: Play with the new model by using django's interactive shell:
 `python manage.py shell`
+
+8: Check that in the `urls.py` file, `admin.autodiscover()` is called.
+
+9: Register the model BlogPost to the admin screens
+(http://localhost:8000/admin) in its `admin.py` file.
