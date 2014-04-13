@@ -13,3 +13,5 @@ mysite/
   wsgi.py
 
 4: Try running the development server: `python manage.py runserver`
+
+5: Start the app blog: `python manage.py startapp blog`
