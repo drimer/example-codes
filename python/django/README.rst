@@ -15,3 +15,14 @@ mysite/
 4: Try running the development server: `python manage.py runserver`
 
 5: Start the app blog: `python manage.py startapp blog`
+
+6: Add the model `BlogPost`, and run `python manage.py syncdb` to make
+django do the necessary changes in the database.
+
+This command will prompt us if we want to add a superuser.
+
+Note: I haven't configured the DB because b default, `settings.py`
+already uses SQLite, which doesn't require any complex setup.
+
+7: Play with the new model by using django's interactive shell:
+`python manage.py shell`
