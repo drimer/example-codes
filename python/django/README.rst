@@ -31,3 +31,6 @@ already uses SQLite, which doesn't require any complex setup.
 
 9: Register the model BlogPost to the admin screens
 (http://localhost:8000/admin) in its `admin.py` file.
+
+10: Add BlogPostAdmin to specify what fields of the blog posts we want
+to display in the admin screen.
