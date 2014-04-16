@@ -16,9 +16,10 @@ def archive(request):
 
 def create_blogpost(request):
     if request.method == 'POST':
-        post = BlogPost(title=request.POST.get('title'),
-                        body=request.POST.get('body'),
-                        timestamp=datetime.now())
-        post.save()
+        form = BlogPostForm(request.POST)
+        if form.is_valid():
+            post = form.save(commit=False)
+            post.timestamp = datetime.now()
+            post.save()
 
     return HttpResponseRedirect('/blog/')

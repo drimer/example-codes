@@ -11,7 +11,8 @@ class BlogPost(models.Model):
         ordering = ['-timestamp']
 
 
-class BlogPostForm(forms.Form):
-    title = forms.CharField(max_length=150)
-    body = forms.CharField(widget=forms.Textarea)
-    timestamp = models.DateTimeField()
+class BlogPostForm(forms.ModelForm):
+
+    class Meta:
+        model = BlogPost
+        exclude = ['timestamp']
