@@ -35,4 +35,5 @@ already uses SQLite, which doesn't require any complex setup.
 10: Add BlogPostAdmin to specify what fields of the blog posts we want
 to display in the admin screen.
 
-11: Improve the looks of it (ie. ordering posts)
+11: Improve the looks of it (ie. ordering posts, use generic views,
+ModelForm when possible, etc)
