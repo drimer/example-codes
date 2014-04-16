@@ -37,3 +37,6 @@ to display in the admin screen.
 
 11: Improve the looks of it (ie. ordering posts, use generic views,
 ModelForm when possible, etc)
+
+12: Add unit tests. To run them, you need to be in the django/mysite/
+directory and execute: `python manage.py test`
