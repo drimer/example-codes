@@ -2,6 +2,7 @@ from datetime import datetime
 
 from django.http import HttpResponseRedirect
 from django.shortcuts import render_to_response
+from django.template import RequestContext
 
 from blog.models import BlogPost
 
@@ -9,7 +10,8 @@ from blog.models import BlogPost
 def archive(request):
     posts = BlogPost.objects.all()
     return render_to_response('archive.html',
-                              {'posts': posts})
+                              {'posts': posts},
+                              RequestContext(request))
 
 
 def create_blogpost(request):
