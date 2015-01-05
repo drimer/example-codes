@@ -1,0 +1,11 @@
+Notes on SQL and SQLPlus
+========================
+
+
+## Check users blocking objects
+
+select a.machine, a.process, a.blocking_session, a.sid, a.serial#, OBJECT_NAME, c.owner
+from v$session a, v$locked_object b, dba_objects c
+where b.object_id = c.object_id
+and a.sid = b.session_id;
+
