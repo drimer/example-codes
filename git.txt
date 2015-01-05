@@ -1,0 +1,9 @@
+## Count lines blamed to someone in particular:
+
+$ git ls-files | grep -v ".gitignore" | xargs -n 1 git blame | grep "Alberto Aguilera" | wc -l
+
+
+## Look for a commit that breaks something:
+
+$ git bisect start good-commit bad-commit
+$ git bisect run comand-that-broke
