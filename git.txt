@@ -7,3 +7,8 @@ $ git ls-files | grep -v ".gitignore" | xargs -n 1 git blame | grep "Alberto Agu
 
 $ git bisect start good-commit bad-commit
 $ git bisect run comand-that-broke
+
+
+## Get commits between two dates
+
+$ git log --since=22-12-2014 --until=23-12-2014
