@@ -12,3 +12,8 @@ $ git bisect run comand-that-broke
 ## Get commits between two dates
 
 $ git log --since=22-12-2014 --until=23-12-2014
+
+
+## Use a customised format with git log:
+
+$ git log --format="%H %an %s"
