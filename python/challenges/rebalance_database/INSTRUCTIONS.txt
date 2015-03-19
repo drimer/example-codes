@@ -1,0 +1,18 @@
+In order to follow the steps in the challenege, all that needs to be done is
+run the following commands:
+    $ python create_db.py  # to generate DB.sqlite, populated with comments
+    $ python add_tables_and_rebalance.py  # to add columns and rebalance data
+
+Notes on the implementation:
+    - For the sake of simplicity, a few things (ie. number of tables, and
+      path to the SQLite file used) have been hardcoded in the code instead
+      of using configuration files or something similar.
+    - The number of random comments inserted in the database can be easily
+      changed in create_db.py, in the line that says:
+          NUM_RANDOM_COMMENTS = 20
+
+In order to check the status of the database at any point:
+    $ sqlite3 DB.sqlite
+    $ .tables
+    $ .schema
+    $ select * from <table_name>;
