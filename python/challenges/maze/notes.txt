@@ -1,0 +1,12 @@
+Assumptions taken for simplicty:
+- A maze is always going to be well defined in a rectangular shape (ie. nothing
+  like "0\n00#\nG").
+- The existing tests have been rewritten so that they follow the general
+  guideline "test one thing", which in practical terms translate into
+  "assert only one thing".
+- Some extra tests have been added to show that I would also test the
+  underlying code used by the two functions tackled in this problem.
+
+Furthermore, the algorithm used is very simple and not as efficient as others.
+Re-writing the solve() method so that it uses the A* algorithm would be an
+interesting improvement.
