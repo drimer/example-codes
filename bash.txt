@@ -1,0 +1,4 @@
+## Copy selected files with directory structure
+$ file_pattern="*.csv"
+$ where_to = "target"
+$ find . -name $file_pattern -exec cp --parents \{\} $where_to \;
