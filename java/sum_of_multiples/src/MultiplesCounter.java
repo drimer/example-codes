@@ -18,6 +18,20 @@ public class MultiplesCounter {
     }
 
     public int getSum(){
-	return this.a + this.b;
+	int sum = 0;
+
+	int current_value = this.a;
+	while (current_value <= this.limit) {
+	    sum += current_value;
+	    current_value += this.a;
+	}
+
+	current_value = this.b;
+	while (current_value <= this.limit) {
+	    sum += current_value;
+	    current_value += this.b;
+	}
+
+	return sum;
     }
 }

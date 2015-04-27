@@ -7,14 +7,15 @@ import src.*;
 
 public class TestGetSum extends TestCase{
 
-    private MultiplesCounter counter;
-
-    public TestGetSum() {
-	this.counter = new MultiplesCounter(3, 5, 6);
+    public void testThatWithNoMultiplesReturnsCorrectSum(){
+	MultiplesCounter counter = new MultiplesCounter(3, 5, 5);
+	int sum = counter.getSum();
+	this.assertEquals(8, sum);
     }
 
-    public void testThatWithNoMultiplesReturnsCorrectSum(){
-	int sum = this.counter.getSum();
-	this.assertEquals(sum, 8);
+    public void testThatWithAFewMultiplesTheSumIsCorrect(){
+	MultiplesCounter counter = new MultiplesCounter(2, 3, 8);
+	int sum = counter.getSum();
+	this.assertEquals(29, sum);
     }
 }
