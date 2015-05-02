@@ -1,0 +1,33 @@
+<div class="panel-group" id="{% verbatim %}{{category.id}}{% endverbatim %}" ng-repeat="category in categoryCtrl.categories">
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h4 class="panel-title">
+	<a class="accordion-toggle" data-toggle="collapse" data-parent="#{{category.id}}" href="#collapse-{{category.id}}" ng-click="categoryCtrl.selectA(category.name)">{{category.name}}</a>
+      </h4>
+    </div>
+    <div class="panel-collapse collapse out" id="collapse-{{category.id}}">
+      <div class="panel-body">
+
+	<div class="panel-group" id="{% verbatim %}{{subCategory.id}}{% endverbatim %}" ng-repeat="subCategory in category.subCategories">
+	  <div class="panel panel-default">
+	    <div class="panel-heading">
+	      <h4 class="panel-title">
+		<a class="accordion-toggle" data-toggle="collapse" data-parent="#{{subCategory.id}}" href="#collapse-{{subCategory.id}}" ng-click="categoryCtrl.selectB(subCategory.name)">{{subCategory.name}}</a>
+	      </h4>
+	    </div>
+	    <div class="panel-collapse collapse out" id="collapse-{{subCategory.id}}">
+	      <div class="panel-body">
+
+		<div class="list-group">
+		  <a href="#" class="list-group-item" ng-repeat="subSubCategory in subCategory.subSubCategories" ng-click="categoryCtrl.selectC(subSubCategory)">{{subSubCategory}}</a>
+		</div>
+
+	      </div>
+	    </div>
+	  </div>
+	</div>
+
+      </div>
+    </div>
+  </div>
+</div>

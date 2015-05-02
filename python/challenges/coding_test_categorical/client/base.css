@@ -1,0 +1,12 @@
+#all-categories {
+    overflow: hidden;
+}
+
+.category-selector {
+    float: left;
+    margin: 5px;
+}
+
+#items-container {
+    margin-top: 10px;
+}
