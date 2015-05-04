@@ -6,9 +6,10 @@ function Id(string) {
 (function(){
     var app = angular.module('store', []);
 
-    app.service('$categories', function(){
+    app.service('$categories', ['$http', function($http){
         this.selected = {a: null, b: null, c: null};
         this.changed = false;
+	this.categories = [];
 
         this.selectA = function(category){
             if (this.selected['a'] != category){
@@ -49,7 +50,41 @@ function Id(string) {
             this.changed = false;
             return ret;
         };
-    });
+
+	this.parseFromJSON = function(data){
+            this.categories = [];
+            for (categoryName in data){
+                var subCategories = [];
+                for (subCategoryName in data[categoryName]) {
+                    var subSubCategories = [];
+                    for (var name in data[categoryName][subCategoryName]) {
+                        subSubCategories.push(name);
+                    };
+
+                    var subCategory = {
+                        name: subCategoryName,
+                        id: Id(categoryName + "-" + subCategoryName),
+                        subSubCategories: subSubCategories,
+                    };
+                    subCategories.push(subCategory);
+                };
+                var category = {
+                    name: categoryName,
+                    id: Id(categoryName), subCategories: subCategories
+                };
+                this.categories.push(category);
+            }
+	};
+
+        service = this;
+        $http.get('/api/categories').success(function(data){
+            service.parseFromJSON(data);
+        });
+
+	this.get = function(){
+	    return this.categories;
+	};
+    }]);
 
     app.directive('mainCategories', function(){
         return {
@@ -57,33 +92,11 @@ function Id(string) {
             templateUrl: '/static/mainCategories.html',
             controllerAs: 'categoryCtrl',
             controller: ['$http', '$categories', function($http, $categories){
-                this.mainCategories = [];
-                this.subCategories = [];
+		this.categories = $categories.categories;
 
-                this.parseCategoriesFromJSON = function(data){
-                    this.categories = [];
-                    for (categoryName in data){
-                        var subCategories = [];
-                        for (subCategoryName in data[categoryName]) {
-                            var subSubCategories = [];
-                            for (var name in data[categoryName][subCategoryName]) {
-                                subSubCategories.push(name);
-                            };
-
-                            var subCategory = {
-                                name: subCategoryName,
-                                id: Id(categoryName + "-" + subCategoryName),
-                                subSubCategories: subSubCategories,
-                            };
-                            subCategories.push(subCategory);
-                        };
-                        var category = {
-                            name: categoryName,
-                            id: Id(categoryName), subCategories: subCategories
-                        };
-                        this.categories.push(category);
-                    }
-                };
+		this.get = function(){
+		    return $categories.get();
+		};
 
                 this.selectA = function (category){
                     $categories.selectA(category);
@@ -96,11 +109,6 @@ function Id(string) {
                 this.selectC = function (category){
                     $categories.selectC(category);
                 };
-                
-                ctrl = this;
-                $http.get('/api/categories').success(function(data){
-                    ctrl.parseCategoriesFromJSON(data);
-                });
             }],
         };
     });
