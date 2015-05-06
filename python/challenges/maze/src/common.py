@@ -1,6 +1,7 @@
 import heapq
 import itertools
 import logging
+from collections import namedtuple
 
 
 class PathNotFoundException(Exception):
@@ -9,6 +10,9 @@ class PathNotFoundException(Exception):
 
 class WrongWay(Exception):
     pass
+
+
+Coordinates = namedtuple('Coordinates', ('x', 'y'))
 
 
 class Cell(object):
@@ -36,7 +40,7 @@ class Cell(object):
 
     @property
     def coords(self):
-        return (self.x, self.y)
+        return Coordinates(self.x, self.y)
 
     @property
     def transitable(self):
@@ -65,9 +69,9 @@ class Maze(object):
         self.height = len(self.grid)
 
         self.cells = {}
-        self.cells[(0, 0)] = Cell(0, 0, string[0])
-        end_coords = self._find_goal_coords()
-        self.cells[end_coords] = Cell(end_coords[0], end_coords[1], 'G')
+
+        self.add_cell(Cell(0, 0, string[0]))
+        self.add_cell(self._build_goal_cell())
 
         self.path = [self.start]
 
@@ -85,11 +89,18 @@ class Maze(object):
         end_coords = self._find_goal_coords()
         return self.cells[end_coords]
 
+    def add_cell(self, cell):
+        self.cells[cell.coords] = cell
+
     def _find_goal_coords(self):
         before_goal = self.maze_string[:self.maze_string.find('G')]
         x = (len(before_goal) - before_goal.count('\n')) / self.width
         y = (len(before_goal) - before_goal.count('\n')) % self.width
         return (x, y)
+
+    def _build_goal_cell(self):
+        goal_coords = self._find_goal_coords()
+        return Cell(goal_coords[0], goal_coords[1], 'G')
 
     def __repr__(self):
         return self.maze_string
