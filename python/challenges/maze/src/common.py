@@ -1,3 +1,4 @@
+import heapq
 import itertools
 import logging
 
@@ -16,12 +17,19 @@ class Cell(object):
         self.x = x
         self.y = y
         self.value = value
+        self.f = 0
+        self.g = 0
+        self.h = 0
+        self.previous = None
 
     def __eq__(self, other):
         if isinstance(other, tuple):
             return self.coords == other
 
         return self.coords == (other.x, other.y)
+
+    def __cmp__(self, other):
+        return self.f - other.f
 
     def __repr__(self):
         return '(%s, %s, "%s")' % (self.x, self.y, self.value)
@@ -56,16 +64,28 @@ class Maze(object):
         self.width = len(self.grid[0])
         self.height = len(self.grid)
 
-        self.start = (0, 0)
+        self.cells = {}
+        self.cells[(0, 0)] = Cell(0, 0, string[0])
+        end_coords = self._find_goal_coords()
+        self.cells[end_coords] = Cell(end_coords[0], end_coords[1], 'G')
+
         self.path = [self.start]
 
         all_coords = itertools.product(range(self.height), range(self.width))
         self.not_visited = set(all_coords) - set([self.start])
-        self.end = self.find_goal_coords()
 
         self.validate()
 
-    def find_goal_coords(self):
+    @property
+    def start(self):
+        return self.cells[(0, 0)]
+
+    @property
+    def end(self):
+        end_coords = self._find_goal_coords()
+        return self.cells[end_coords]
+
+    def _find_goal_coords(self):
         before_goal = self.maze_string[:self.maze_string.find('G')]
         x = (len(before_goal) - before_goal.count('\n')) / self.width
         y = (len(before_goal) - before_goal.count('\n')) % self.width
@@ -84,6 +104,10 @@ class Maze(object):
         assert all(c in valid_chars for c in all_chars)
 
     def get_cell(self, x, y, default=None):
+        cell = self.cells.get((x, y), None)
+        if cell:
+            return cell
+
         invalid_coords = (
             x >= self.height
             or y >= self.width
@@ -95,14 +119,12 @@ class Maze(object):
 
         value = self.grid[x][y]
         cell = Cell(x, y, value)
+        self.cells[(cell.x, cell.y)] = cell
         return cell
 
-    def possible_next_cells(self):
-        cur_coords = self.path[-1]
-        cur_cell = self.get_cell(cur_coords[0], cur_coords[1])
-
+    def get_neighbour_cells(self, cell):
         candidates = []
-        for new_coords in cur_cell.get_adjacent_coords():
+        for new_coords in cell.get_adjacent_coords():
             cell = self.get_cell(new_coords[0], new_coords[1])
             if cell is None:
                 continue
@@ -112,53 +134,62 @@ class Maze(object):
 
         return candidates
 
-    def compute_path_into_steps(self):
-        steps = []
-        for prev, new in zip(self.path[:-1], self.path[1:]):
-            if new[0] > prev[0]:
-                steps.append('D')
-            elif new[0] < prev[0]:
-                steps.append('U')
-            elif new[1] > prev[1]:
-                steps.append('R')
-            elif new[1] < prev[1]:
-                steps.append('L')
-            else:
-                logging.warning(
-                    'list_of_coords_to_steps: No difference between two steps.'
-                )
-
-        return ''.join(steps)
+    @staticmethod
+    def __cost_estimate(begin, end):
+        return abs(begin.x - end.x) + abs(begin.y - end.y)
 
     def solve(self):
-        while True:
-            if len(self.not_visited) == 0:
-                break
+        closed_set = set()
+        open_set = [self.start]
 
-            consecutive_found = False
-            candidates = self.possible_next_cells()
-            if not candidates:
-                self.path.pop()
-                continue
-            next_cell = candidates[0]
-            self.path.append(next_cell.coords)
-            self.not_visited.discard(next_cell.coords)
-            consecutive_found = True
+        self.start.g = 0
+        self.start.f = self.start.g + self.__cost_estimate(self.start, self.end)
+        while open_set:
+            current = heapq.heappop(open_set)
+            if current.coords == self.end.coords:
+                return reconstruct_path(self.end)
 
-            if next_cell == self.end:
-                return self.compute_path_into_steps()
-                #return self.path
+            closed_set.add(current)
+            for neighbour in self.get_neighbour_cells(current):
+                if neighbour in closed_set:
+                    continue
 
-            if not consecutive_found:
-                self.path.pop()
-                if self.path == []:
-                    break
+                tentative_g_score = current.g + 1
 
-        return self.compute_path_into_steps()
+                if neighbour not in open_set or tentative_g_score < neighbour.g:
+                    neighbour.previous = current
+                    neighbour.g = tentative_g_score
+                    neighbour.f = neighbour.g + self.__cost_estimate(neighbour, self.end)
+                    if neighbour not in open_set:
+                        heapq.heappush(open_set, neighbour)
+
+        return False
 
     def new_walker(self):
         return MazeWalker(self)
 
+
+def reconstruct_path(end):
+    steps = []
+    current = end
+    while current.previous is not None:
+        previous = current.previous
+        if previous.x < current.x:
+            steps.insert(0, 'D')
+        elif previous.x > current.x:
+            steps.insert(0, 'U')
+        elif previous.y < current.y:
+            steps.insert(0, 'R')
+        elif previous.y > current.y:
+            steps.insert(0, 'L')
+        else:
+            logging.warning(
+                'list_of_coords_to_steps: No difference between two steps.'
+            )
+
+        current = current.previous
+
+    return ''.join(steps)
 
 class MazeWalker(object):
 
