@@ -13,7 +13,9 @@
 
 <h1>Categorical Coding Test</h1>
 
-<div>
+<div id="warnings"></div>
+
+<div id="web-content">
   <div class="row" ng-app="store">
 
     <div class="col-md-3">
@@ -35,6 +37,8 @@
 <script src="{% static 'angular.js' %}"></script>
 <!-- JS entry point -->
 <script src="{% static 'base.js' %}"></script>
+<!-- Ensure previous dependencies have been loaded -->
+<script src="{% static 'dependencies.js' %}"></script>
 
 </body>
 </html>
