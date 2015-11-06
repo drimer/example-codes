@@ -9,3 +9,9 @@ from v$session a, v$locked_object b, dba_objects c
 where b.object_id = c.object_id
 and a.sid = b.session_id;
 
+
+## Suppose you have a table purchase(id, day, price). Write an SQL query that
+selects ids of the unique ones, such that no other purchases happened on
+the same day by the same price.**
+
+select id from purchase where (day, price) in (select day, price from purchase group by day, price having count(*) = 1);
