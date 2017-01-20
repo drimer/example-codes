@@ -1,0 +1,22 @@
+.chat-container {
+    font-family:Georgia, Times, serif;
+    font-size:15px;
+    list-style: none;
+    border: 1px solid grey;
+    height: 75%;
+    width: 75%;
+    overflow: scroll;
+}
+
+.chat-container li { }
+
+.chat-container li .username {
+    font-weight: bold;
+    display: inline;
+}
+
+.new-message-form {
+    width: 75%;
+}
+.new-message-form .username { display: inline;}
+.new-message-form input[type="text"] { display: inline; width: 50%; }
