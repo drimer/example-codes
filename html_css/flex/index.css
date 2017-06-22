@@ -1,0 +1,77 @@
+html, body {
+  margin: 0;
+  height: 100%;
+}
+
+#main-container {
+  display: flex;
+  flex-direction: column;
+}
+
+#header {
+  display: flex;
+  align-items: center;
+  padding-left: 20px;
+  padding-right: 20px;
+  min-height: 70px;
+
+  background-color: #24292e;
+  color: #fff;
+}
+
+#subheader-menu-bar {
+  display: flex;
+  flex-direction: row-reverse;
+
+  height: 25px;
+  padding-left: 20px;
+  padding-right: 20px;
+
+  background-color: #eee;
+}
+
+.subheader-item {
+  padding-left: 10px;
+  padding-right: 5px;
+}
+
+a:visited, .a:link {
+  text-decoration: none;
+}
+
+#header-text {
+  flex-grow: 2;
+}
+
+#page-body {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+
+  padding: 20px;
+}
+
+.reminder {
+  margin: 20px;
+
+  border: 1px solid rgb(110,110,110);
+  border-radius: 4px;
+  min-width: 150px;
+
+  background-color: #dee;
+}
+
+.reminder-title {
+  min-height: 30px;
+  vertical-align: center;
+  padding: 4px;
+  border-bottom: 1px solid rgb(110, 110, 110);
+
+  background-color: #eee;
+}
+
+.reminder-description {
+  padding: 4px;
+  min-height: 40px;
+}
+
