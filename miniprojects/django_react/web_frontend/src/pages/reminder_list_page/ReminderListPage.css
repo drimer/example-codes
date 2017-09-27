@@ -1,0 +1,21 @@
+#main-container {
+  display: flex;
+  flex-direction: column;
+}
+
+a:visited, .a:link {
+  text-decoration: none;
+}
+
+#header-text {
+  flex-grow: 2;
+}
+
+#page-body {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+
+  padding: 20px;
+}
+
