@@ -1,7 +1,7 @@
 import React from 'react';
 
-import Header from '../../components/header/Header.js';
-import Subheader from '../../components/subheader/Subheader.js';
+import Header from '../../common/components/header/Header.js';
+import Subheader from '../../common/components/subheader/Subheader.js';
 
 
 
