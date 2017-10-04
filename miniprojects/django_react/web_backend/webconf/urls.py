@@ -15,17 +15,10 @@ Including another URLconf
 """
 from django.conf.urls import url, include
 from django.contrib import admin
-from django.http import HttpResponse
 
 from webapp import urls as webapp_urls
-
-
-def test(request):
-    return HttpResponse('hiya')
-
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^', include(webapp_urls)),
-    url(r'^test/', test),
 ]

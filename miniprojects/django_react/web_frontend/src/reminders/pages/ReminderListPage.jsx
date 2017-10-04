@@ -12,6 +12,10 @@ function ReminderListPageTemplate(props) {
             <Subheader/>
 
             <div id="page-body">
+                {props.error &&
+                    <div class="error">{props.error}</div>
+                }
+
                 {props.reminders.map((reminder) =>
                     <ReminderSummaryBox id={reminder.id} reminder={reminder} />
                 )}
