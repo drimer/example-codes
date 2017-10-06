@@ -17,7 +17,7 @@ function ReminderListPageTemplate(props) {
                 }
 
                 {props.reminders.map((reminder) =>
-                    <ReminderSummaryBox id={reminder.id} reminder={reminder} />
+                    <ReminderSummaryBox key={reminder.id} reminder={reminder} />
                 )}
             </div>
         </div>
