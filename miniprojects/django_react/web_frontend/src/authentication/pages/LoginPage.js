@@ -3,7 +3,6 @@ import { Redirect } from 'react-router-dom';
 
 import LoginPageTemplate from './LoginPage.jsx';
 import Authenticator from '../modules/Authenticator.js';
-import UserTokenStorage from '../modules/UserTokenStorage.js';
 
 
 export default class LoginPage extends React.Component {
@@ -50,8 +49,6 @@ export default class LoginPage extends React.Component {
 
         Authenticator.login(this.state.username, this.state.password)
             .then((token) => {
-                UserTokenStorage.authenticateUser(token);
-
                 this.setState({
                     errors: [],
                     loginSuccessful: true,
