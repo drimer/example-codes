@@ -1,4 +1,5 @@
 import React from 'react';
+import { Redirect } from 'react-router-dom';
 
 import LoginPageTemplate from './LoginPage.jsx';
 import Authenticator from '../modules/Authenticator.js';
@@ -13,6 +14,7 @@ export default class LoginPage extends React.Component {
             username: '',
             password: '',
             errors: [],
+            loginSuccessful: false,
         };
 
         this.handleLoginSubmit = this.handleLoginSubmit.bind(this);
@@ -21,6 +23,10 @@ export default class LoginPage extends React.Component {
     }
 
     render() {
+        if (this.state.loginSuccessful) {
+            return <Redirect to="/" />
+        }
+
         return (
             <LoginPageTemplate
                 handleLoginSubmit={this.handleLoginSubmit}
@@ -46,9 +52,10 @@ export default class LoginPage extends React.Component {
             .then((token) => {
                 UserTokenStorage.authenticateUser(token);
 
-                this.setState({errors: []});
-
-                this.context.router.replace('/');
+                this.setState({
+                    errors: [],
+                    loginSuccessful: true,
+                });
             })
             .catch((errors) => {
                 this.setState({errors: errors});
