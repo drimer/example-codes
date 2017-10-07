@@ -1,7 +1,7 @@
 import React from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 
-import UserTokenStorage from './authentication/modules/UserTokenStorage.js';
+import Authenticator from './authentication/modules/Authenticator.js';
 import LoginPage from './authentication/pages/LoginPage.js';
 import LogoutPage from './authentication/pages/LogoutPage.js';
 import ReminderListPage from './reminders/pages/ReminderListPage.js';
@@ -12,7 +12,7 @@ const Router = (
         <Switch>
             <Route exact path="/" render={() => {
                 return (
-                    UserTokenStorage.isUserAuthenticated()
+                    Authenticator.isUserAuthenticated()
                         ? <ReminderListPage/>
                         : <LoginPage/>
                 );
@@ -20,7 +20,7 @@ const Router = (
 push
             <Route exact path="/login" render={() => {
                 return (
-                    UserTokenStorage.isUserAuthenticated()
+                    Authenticator.isUserAuthenticated()
                         ? <ReminderListPage/>
                         : <LoginPage/>
                 );
@@ -30,7 +30,7 @@ push
 
             <Route exact path="/reminders" render={() => {
                 return (
-                    UserTokenStorage.isUserAuthenticated()
+                    Authenticator.isUserAuthenticated()
                         ? <ReminderListPage/>
                         : <LoginPage/>
                 );
