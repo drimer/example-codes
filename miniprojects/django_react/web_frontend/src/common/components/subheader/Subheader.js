@@ -4,8 +4,10 @@ import './Subheader.css';
 import SubheaderTemplate from './Subheader.jsx';
 
 
-function Subheader() {
-    return <SubheaderTemplate />;
+function Subheader(props) {
+    return <SubheaderTemplate
+        isUserAuthenticated={props.isUserAuthenticated}
+    />;
 }
 
 

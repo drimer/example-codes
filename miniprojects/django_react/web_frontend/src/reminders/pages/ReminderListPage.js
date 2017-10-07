@@ -44,7 +44,9 @@ export default class ReminderListPage extends React.Component {
         return (
             <ReminderListPageTemplate
                 reminders={this.state.reminders}
-                error={this.state.error} />
+                error={this.state.error}
+                isUserAuthenticated={UserTokenStorage.isUserAuthenticated()}
+            />
         );
     }
 }

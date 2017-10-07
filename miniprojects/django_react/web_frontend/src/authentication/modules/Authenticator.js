@@ -1,4 +1,5 @@
 import Request from "es6-request";
+import UserTokenStorage from "./UserTokenStorage";
 
 
 const BACKEND_URL = "http://localhost:8990";
@@ -35,5 +36,16 @@ export default class Authenticator {
                     resolve(bodyJson.token);
                 });
         });
+    }
+
+
+    /**
+     * Logs out to the backend and returns True if successful
+     *
+     * @returns {bool}
+     */
+    static logout() {
+        UserTokenStorage.deauthenticateUser();
+        return true;
     }
 }
