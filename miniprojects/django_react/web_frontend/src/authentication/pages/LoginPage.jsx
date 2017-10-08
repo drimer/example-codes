@@ -1,27 +1,34 @@
 import React from 'react';
 
+import './LoginPage.css';
 import Header from '../../common/components/header/Header.js';
-import Subheader from '../../common/components/subheader/Subheader.js';
-
+import SettingsMenu from "../../common/components/header/SettingsMenu.js";
 
 
 function LoginPageTemplate(props) {
     return (
-        <div id="main-container">
-            <Header/>
-            <Subheader/>
-            <p>Login page</p>
+        <div>
+            <div id="main-container">
+                <Header/>
 
-            {props.errors.length > 0 &&
-                <p>{props.errors}</p>
-            }
+                {props.errors.length > 0 &&
+                    <p>{props.errors}</p>
+                }
 
-            <form onSubmit={props.handleLoginSubmit}>
-                <p>Username: <input name="username" onChange={props.handleUsernameChange} /></p>
-                <p>Password: <input name="password" type="password" onChange={props.handlePasswordChange}/></p>
+                <div id="login-form-container">
+                    <form id="login-form" onSubmit={props.handleLoginSubmit}>
+                        <label htmlFor="username">Username</label>
+                        <input id="username" name="username" onChange={props.handleUsernameChange} />
 
-                <input type="submit" text="Submit" />
-            </form>
+                        <label htmlFor="password">Password</label>
+                        <input id="password" name="password" type="password" onChange={props.handlePasswordChange}/>
+
+                        <input className="action-btn" type="submit" value="Log in" />
+                    </form>
+                </div>
+            </div>
+
+            <SettingsMenu/>
         </div>
     );
 }

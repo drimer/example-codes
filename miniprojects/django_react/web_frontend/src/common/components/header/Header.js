@@ -1,12 +1,19 @@
 import React from 'react';
+import $ from 'jquery/dist/jquery.js';
 
-import './Header.css'
 import HeaderTemplate from './Header.jsx';
 
 
-function Header() {
-    return <HeaderTemplate />;
+export default class Header extends React.Component {
+    render() {
+        return (
+            <HeaderTemplate
+                onSettingsIconClick={this.onSettingsIconClick}
+            />
+        );
+    }
+
+    onSettingsIconClick() {
+        $('#user-menu').toggle();
+    }
 }
-
-
-export default Header;
