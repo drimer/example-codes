@@ -8,7 +8,7 @@ services:
       - 80
     tty: true
     env_file:
-      - env_variables.env
+      - config/web_backend.env
 
   web_frontend:
     build: './web_frontend'

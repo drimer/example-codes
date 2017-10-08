@@ -131,6 +131,7 @@ STATIC_URL = '/static/'
 # django-cors-headers
 CORS_ORIGIN_WHITELIST = (
     'localhost',
+    os.environ.get('DOMAIN', 'localhost'),
 )
 CORS_ALLOW_CREDENTIALS = False
 CORS_ALLOW_METHODS = (

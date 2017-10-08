@@ -12,6 +12,6 @@ RUN pip install -r /src/requirements.txt
 
 EXPOSE 80
 
-ENV BASE_URL "http://localhost"
+ENV DOMAIN "localhost"
 
 CMD python manage.py runserver 0.0.0.0:80

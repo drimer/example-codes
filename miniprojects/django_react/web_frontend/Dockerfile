@@ -18,6 +18,4 @@ RUN npm install
 
 EXPOSE 3000
 
-ENV BASE_URL "http://localhost"
-
 CMD npm run start
