@@ -1,16 +1,12 @@
 import React from 'react';
 
 import './LoginPage.css';
-import Header from '../../common/components/header/Header.js';
-import SettingsMenu from "../../common/components/header/SettingsMenu.js";
+import PageWithHeader from '../../common/pages/PageWithHeader.js';
 
 
 function LoginPageTemplate(props) {
     return (
-        <div>
-            <div id="main-container">
-                <Header/>
-
+        <PageWithHeader>
                 {props.errors.length > 0 &&
                     <p>{props.errors}</p>
                 }
@@ -26,10 +22,7 @@ function LoginPageTemplate(props) {
                         <input className="action-btn" type="submit" value="Log in" />
                     </form>
                 </div>
-            </div>
-
-            <SettingsMenu/>
-        </div>
+         </PageWithHeader>
     );
 }
 
