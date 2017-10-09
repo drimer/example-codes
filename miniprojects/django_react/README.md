@@ -27,7 +27,7 @@ $ docker-compose up
 Now you have the web up and running on http://localhost/
 
 
-Alternatively to the last step, you can run the app in the backgroun and check the logs only when
+Alternatively to the last step, you can run the app in the background and check the logs only when
 necessary as follows:
 
 ```
@@ -38,7 +38,7 @@ $ docker-compose logs -f  # to check the logs
 Updating frontend libraries
 ===========================
 
-If you need to edit any dependencies for the UI, you'll need to re-created the
+If you need to edit any dependencies for the UI, you'll need to re-create the
 `node_modules/` folder and commit those changes too. You can do this with the
 following steps.
 
