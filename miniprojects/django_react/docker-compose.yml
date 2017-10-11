@@ -1,0 +1,30 @@
+version: '2'
+services:
+  web_backend:
+    build: './web_backend'
+    volumes:
+      - ./web_backend:/src
+    expose:
+      - 80
+    tty: true
+    env_file:
+      - config/web_backend.env
+
+  web_frontend:
+    build: './web_frontend'
+    volumes:
+      - ./web_frontend:/src
+    expose:
+      - 3000
+    tty: true
+    depends_on:
+      - web_backend
+
+  nginx:
+    build: './nginx'
+    ports:
+      - 80:80
+      - 8990:8990
+    depends_on:
+      - web_backend
+      - web_frontend

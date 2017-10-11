@@ -1,0 +1,24 @@
+
+.reminder {
+  margin: 20px;
+
+  border: 1px solid rgb(110,110,110);
+  border-radius: 4px;
+  min-width: 150px;
+
+  background-color: #dee;
+}
+
+.reminder-title {
+  min-height: 30px;
+  vertical-align: center;
+  padding: 4px;
+  border-bottom: 1px solid rgb(110, 110, 110);
+
+  background-color: #eee;
+}
+
+.reminder-description {
+  padding: 4px;
+  min-height: 40px;
+}
