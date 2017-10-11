@@ -9,7 +9,7 @@ function ReminderListPageTemplate(props) {
     return (
         <div id="main-container">
             <Header/>
-            <Subheader/>
+            <Subheader isUserAuthenticated={props.isUserAuthenticated}/>
 
             <div id="page-body">
                 {props.error &&
