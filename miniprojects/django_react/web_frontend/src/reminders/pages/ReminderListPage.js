@@ -3,7 +3,7 @@ import Request from 'es6-request';
 
 import './ReminderListPage.css';
 import ReminderListPageTemplate from './ReminderListPage.jsx';
-import UserTokenStorage from "../../authentication/modules/UserTokenStorage";
+import Authenticator from "../../authentication/modules/Authenticator";
 
 
 const BACKEND_URL = 'http://localhost:8990'
@@ -19,7 +19,7 @@ export default class ReminderListPage extends React.Component {
     }
 
     componentDidMount() {
-        const token = UserTokenStorage.getToken();
+        const token = Authenticator.getToken();
 
         Request.get(BACKEND_URL + "/reminders/")
             .header('Authorization', 'Token ' + token)
@@ -45,7 +45,7 @@ export default class ReminderListPage extends React.Component {
             <ReminderListPageTemplate
                 reminders={this.state.reminders}
                 error={this.state.error}
-                isUserAuthenticated={UserTokenStorage.isUserAuthenticated()}
+                isUserAuthenticated={Authenticator.isUserAuthenticated()}
             />
         );
     }

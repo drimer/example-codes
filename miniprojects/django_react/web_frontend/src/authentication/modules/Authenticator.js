@@ -1,5 +1,4 @@
 import Request from "es6-request";
-import UserTokenStorage from "./UserTokenStorage";
 
 
 const BACKEND_URL = "http://localhost:8990";
@@ -33,6 +32,8 @@ export default class Authenticator {
                         reject(e.message);
                     }
 
+                    localStorage.setItem('token', bodyJson.token);
+
                     resolve(bodyJson.token);
                 });
         });
@@ -45,7 +46,27 @@ export default class Authenticator {
      * @returns {bool}
      */
     static logout() {
-        UserTokenStorage.deauthenticateUser();
+        localStorage.removeItem('token');
         return true;
+    }
+
+
+    /**
+     * Check if a user is authenticated - check if a token is saved in Local Storage
+     *
+     * @returns {boolean}
+     */
+    static isUserAuthenticated() {
+        return localStorage.getItem('token') !== null;
+    }
+
+
+    /**
+     * Get a token value.
+     *
+     * @returns {string}
+     */
+    static getToken() {
+        return localStorage.getItem('token');
     }
 }
