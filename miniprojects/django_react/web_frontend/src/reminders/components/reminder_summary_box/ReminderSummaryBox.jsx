@@ -1,9 +1,9 @@
 import React from 'react';
 
-import './Reminder.css';
+import './ReminderSummaryBox.css';
 
 
-export default function ReminderTemplate(props) {
+export default function ReminderSummaryBoxTemplate(props) {
     return (
         <div className="reminder">
             <div className="reminder-title">

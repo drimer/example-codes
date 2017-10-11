@@ -1,8 +1,8 @@
 import React from 'react';
 
-import Header from '../../components/header/Header.js';
-import Subheader from '../../components/subheader/Subheader.js';
-import Reminder from '../../components/reminder/Reminder.js';
+import Header from '../../common/components/header/Header.js';
+import Subheader from '../../common/components/subheader/Subheader.js';
+import ReminderSummaryBox from '../components/reminder_summary_box/ReminderSummaryBox.js';
 
 
 function ReminderListPageTemplate(props) {
@@ -13,7 +13,7 @@ function ReminderListPageTemplate(props) {
 
             <div id="page-body">
                 {props.reminders.map((reminder) =>
-                    <Reminder id={reminder.id} reminder={reminder} />
+                    <ReminderSummaryBox key={reminder.id} reminder={reminder} />
                 )}
             </div>
         </div>

@@ -1,8 +1,8 @@
 import React from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 
-import LoginPage from './pages/login_page/LoginPage.js';
-import ReminderListPage from './pages/reminder_list_page/ReminderListPage.js';
+import LoginPage from './authentication/pages/LoginPage.js';
+import ReminderListPage from './reminders/pages/ReminderListPage.js';
 
 
 const Router = (

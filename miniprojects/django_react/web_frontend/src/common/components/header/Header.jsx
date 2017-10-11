@@ -1,7 +1,7 @@
 import React from 'react';
 
 
-function Header(props) {
+export default function HeaderTemplate(props) {
     return (
         <div id="header">
             <div id="header-text">Welcome to our site!</div>
@@ -9,6 +9,3 @@ function Header(props) {
         </div>
     );
 }
-
-
-export default Header;
