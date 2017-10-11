@@ -21,7 +21,7 @@ export default function SettingsMenuTemplate(props) {
 
                 {props.showLogin &&
                 <li className="user-menu-item">
-                    <Link to="/login">Log in</Link>
+                    <Link to="/login" onClick={props.onLoginClick}>Log in</Link>
                 </li>
                 }
             </ul>
