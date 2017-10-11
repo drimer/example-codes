@@ -1,10 +1,27 @@
 #header {
-  display: flex;
-  align-items: center;
-  padding-left: 20px;
-  padding-right: 20px;
-  min-height: 70px;
+    align-items: center;
+    background-color: #026AA7;
+    color: #fff;
+    display: flex;
+    height: 30px;
+    padding: 5px 8px;
+}
 
-  background-color: #24292e;
-  color: #fff;
+#logo-img {
+    height: 30px;
+}
+
+#header-logo-container {
+    flex-grow: 2;
+}
+
+#header-settings-icon-container {
+    padding-right: 10px;
+    font-size: 26pt;
+}
+
+#burger-icon {
+    cursor: pointer;
+    display: block;
+    margin-top: -8px;
 }

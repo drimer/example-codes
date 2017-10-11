@@ -1,24 +1,26 @@
-
 .reminder {
-  margin: 20px;
-
-  border: 1px solid rgb(110,110,110);
-  border-radius: 4px;
-  min-width: 150px;
-
-  background-color: #dee;
+    border-radius: 4px;
+    margin: 20px;
+    min-width: 150px;
+    width: 250px;
 }
 
 .reminder-title {
-  min-height: 30px;
-  vertical-align: center;
-  padding: 4px;
-  border-bottom: 1px solid rgb(110, 110, 110);
-
-  background-color: #eee;
+    background-color: #fff;
+    border: 2px solid #ffaa00;
+    border-radius: 5px 5px 0 0;
+    font-weight: bold;
+    min-height: 30px;
+    padding-top: .6em;
+    text-align: center;
 }
 
 .reminder-description {
-  padding: 4px;
-  min-height: 40px;
+    background-color: #e6f6fe;
+    border: 2px solid #026AA7;
+    border-radius: 0 0 5px 5px;
+    box-shadow: 0 1px 6px rgba(0, 0, 0, .15);
+    min-height: 40px;
+    padding-left: .5em;
+    padding-top: 0.5em;
 }
