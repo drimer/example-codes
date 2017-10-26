@@ -1,1 +1,4 @@
+dependency_injector==3.7.0
 django==1.11.6
+djangorestframework==3.7.1
+six==1.11.0
