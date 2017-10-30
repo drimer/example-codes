@@ -8,6 +8,6 @@ class BlueprintFactory(object):
     def create():
         blueprint = Blueprint('people', 'people')
 
-        blueprint.route('/person/', methods=['POST'])(create_person)
+        blueprint.add_url_rule('/person', view_func=create_person, methods=['POST'])
 
         return blueprint

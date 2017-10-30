@@ -1,9 +1,24 @@
 from flask import Flask
+from flask_sqlalchemy import SQLAlchemy
+from injector import provider, inject
+
+from people.views import create_person
 
 
-def create_app(db, blueprints):
-    api = Flask('api')
+class App(Flask):
+    pass
 
+
+class DatabaseInterface(SQLAlchemy):
+    pass
+
+
+@inject
+@provider
+def create_app(db: DatabaseInterface) -> App:
+    api = App('api')
+
+    blueprints = [create_person]
     for blueprint in blueprints:
         api.register_blueprint(blueprint)
 
