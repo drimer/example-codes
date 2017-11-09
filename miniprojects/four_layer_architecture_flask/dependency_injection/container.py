@@ -1,36 +1,47 @@
+import injector
 from flask.app import Flask
 from flask_injector import FlaskInjector
-from injector import Binder, Module, provider, singleton
 
-from database import DatabaseInterface
+from database import DatabaseInterface, SqlAlchemyInterface
 from people.blueprint import BlueprintFactory as PeopleBluePrintFactory
-from people.controllers import PersonService
+from people.db.models import db
+
+__all__ = ['DIContainer']
 
 
-class PeopleModule(Module):
-    @singleton
-    @provider
-    def provide_person_service(self) -> PersonService:
-        return PersonService()
-
-
-def configure(binder: Binder):
+def configure(binder: injector.Binder):
     binder.bind(
         DatabaseInterface,
-        to=DatabaseInterface(),
+        to=db,
     )
 
 
+class DatabaseModule(injector.Module):
+    @injector.singleton
+    @injector.provider
+    def provide_db(self) -> DatabaseInterface:
+        return SqlAlchemyInterface()
+
+
 class DIContainer(FlaskInjector):
-    @classmethod
-    def create_app(cls):
-        app = Flask(__name__)
+    _instance = None
 
-        app.register_blueprint(PeopleBluePrintFactory.create())
+    def __new__(cls, *args, **kwargs):
+        if cls._instance is None:
+            app = Flask(__name__)
 
-        FlaskInjector(
-            app=app,
-            modules=[configure, PeopleModule],
-        )
+            app.register_blueprint(PeopleBluePrintFactory.create())
 
-        return app
+            flask_injector = FlaskInjector(
+                app=app,
+                modules=[DatabaseModule(), ],
+            )
+
+            db.init_app(app)
+
+            with app.app_context():
+                db.create_all()
+
+            cls._instance = flask_injector
+
+        return cls._instance

@@ -2,7 +2,7 @@ from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from injector import provider, inject
 
-from people.views import create_person
+from people.presentation.views import create_person
 
 
 class App(Flask):

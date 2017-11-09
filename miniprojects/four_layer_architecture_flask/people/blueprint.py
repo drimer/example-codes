@@ -1,6 +1,6 @@
 from flask.blueprints import Blueprint
 
-from .views import create_person
+from people.presentation.views import create_person, get_person
 
 
 class BlueprintFactory(object):
@@ -9,5 +9,6 @@ class BlueprintFactory(object):
         blueprint = Blueprint('people', 'people')
 
         blueprint.add_url_rule('/person', view_func=create_person, methods=['POST'])
+        blueprint.add_url_rule('/person/<int:pk>', view_func=get_person, methods=['GET'])
 
         return blueprint
