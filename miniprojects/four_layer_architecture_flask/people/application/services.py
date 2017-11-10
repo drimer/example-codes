@@ -3,30 +3,28 @@ from datetime import datetime
 from injector import inject
 
 from database import DatabaseInterface
+from people.application.repositories import PersonRepository
 from people.db.models import Person
 
 
 class PersonService(object):
     @inject
-    def __init__(self, db: DatabaseInterface):
+    def __init__(self, db: DatabaseInterface, repository: PersonRepository):
         self.db = db
-
-    def find_by_id(self, id):
-        return 'found'
+        self.repository = repository
 
     def create(self, data):
-        qry = Person.query.filter_by(phone_number=data['phone_number'])
-        if qry.count():
+        if self.repository.get_count(phone_number=data['phone_number']):
             return None
 
-        entity = Person(
+        entity = self.repository.create(
             first_name=data['first_name'],
             phone_number=data['phone_number'],
             created=datetime.utcnow(),
         )
 
-        self.db.session.add(entity)
-        self.db.session.commit()
+        self.db.add(entity)
+        self.db.commit()
 
         return entity
 

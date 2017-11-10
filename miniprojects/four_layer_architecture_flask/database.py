@@ -4,11 +4,19 @@ __all__ = ['DatabaseInterface', 'db']
 
 
 class DatabaseInterface(object):
-    pass
+    def add(self, entity: object):
+        raise NotImplementedError
+
+    def commit(self):
+        raise NotImplementedError
 
 
 class SqlAlchemyInterface(SQLAlchemy, DatabaseInterface):
-    pass
+    def add(self, entity: object):
+        self.session.add(entity)
+
+    def commit(self):
+        self.session.commit()
 
 
 db = SqlAlchemyInterface()
