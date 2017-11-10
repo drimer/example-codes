@@ -17,8 +17,3 @@ def test_app_context(test_flask_app):
 def test_request_context(test_app_context, test_flask_app):
     with test_flask_app.test_request_context():
         yield
-
-
-@pytest.fixture(scope="module")
-def something():
-    return 'something'
