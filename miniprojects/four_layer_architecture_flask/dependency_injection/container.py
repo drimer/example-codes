@@ -2,25 +2,17 @@ import injector
 from flask.app import Flask
 from flask_injector import FlaskInjector
 
-from database import DatabaseInterface, SqlAlchemyInterface
+from database import DatabaseInterface, db
 from people.blueprint import BlueprintFactory as PeopleBluePrintFactory
-from people.db.models import db
 
 __all__ = ['DIContainer']
-
-
-def configure(binder: injector.Binder):
-    binder.bind(
-        DatabaseInterface,
-        to=db,
-    )
 
 
 class DatabaseModule(injector.Module):
     @injector.singleton
     @injector.provider
     def provide_db(self) -> DatabaseInterface:
-        return SqlAlchemyInterface()
+        return db
 
 
 class DIContainer(FlaskInjector):

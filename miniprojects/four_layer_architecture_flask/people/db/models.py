@@ -1,8 +1,6 @@
 from datetime import datetime
 
-from flask_sqlalchemy import SQLAlchemy
-
-db = SQLAlchemy()
+from database import db
 
 
 class Person(db.Model):

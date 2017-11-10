@@ -1,5 +1,7 @@
 from flask_sqlalchemy import SQLAlchemy
 
+__all__ = ['DatabaseInterface', 'db']
+
 
 class DatabaseInterface(object):
     pass
@@ -7,3 +9,6 @@ class DatabaseInterface(object):
 
 class SqlAlchemyInterface(SQLAlchemy, DatabaseInterface):
     pass
+
+
+db = SqlAlchemyInterface()
