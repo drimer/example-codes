@@ -1,10 +1,11 @@
 import pytest
-from flask.app import Flask
+
+from dependency_injection.container import DIContainer
 
 
 @pytest.yield_fixture(autouse=True)
 def test_flask_app():
-    return Flask('test_app')
+    return DIContainer().app
 
 
 @pytest.yield_fixture(autouse=True)
