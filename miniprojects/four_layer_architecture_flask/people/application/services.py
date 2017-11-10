@@ -4,7 +4,6 @@ from injector import inject
 
 from database import DatabaseInterface
 from people.application.repositories import PersonRepository
-from people.db.models import Person
 
 
 class PersonService(object):
@@ -29,4 +28,4 @@ class PersonService(object):
         return entity
 
     def get_all(self):
-        return Person.query.all()
+        return self.repository.get_all()
