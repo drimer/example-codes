@@ -29,3 +29,6 @@ class PersonService(object):
         self.db.session.commit()
 
         return entity
+
+    def get_all(self):
+        return Person.query.all()
