@@ -1,19 +1,27 @@
-import pytest
-from flask_sqlalchemy import SQLAlchemy
+from uuid import uuid4
 
+import pytest
+
+from database import db
 from dependency_injection.container import DIContainer
 
 
 @pytest.fixture
-def test_db():
-    return SQLAlchemy()
+def test_db(flask_app):
+    uuid = str(uuid4())
+    flask_app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:////tmp/test-{}.db'.format(uuid)
+
+    db.init_app(flask_app)
+    with flask_app.app_context():
+        db.create_all()
+
+    return db
 
 
 @pytest.yield_fixture(autouse=True)
-def flask_app(test_db):
+def flask_app():
     app = DIContainer().app
 
-    app.config['DATABASE'] = test_db
     app.testing = True
 
     return app
