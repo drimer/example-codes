@@ -54,3 +54,13 @@ def test_get_person_returns_all_people(flask_client, people):
     )
 
     assert actual_data == expected_data
+
+
+def test_get_person_returns_empty_list_when_no_records(test_db, flask_client):
+    del test_db
+
+    response = flask_client.get('/person')
+
+    actual_data = json.loads(response.get_data().decode('utf8'))
+
+    assert actual_data == []
