@@ -38,7 +38,7 @@ def test_get_returns_all_matches(
     view = PeopleListOrCreateView(person_service, person_serialiser, person_parser, request)
     result = view.get()
 
-    person_serialiser.serialise.assert_called_once_with(existing_people, many=True)
+    person_serialiser.serialise.assert_called_once_with(view.schema, existing_people, many=True)
     assert result == serialised_people
 
 
@@ -57,7 +57,7 @@ def test_post_creates_new_person(
     view = PeopleListOrCreateView(person_service, person_serialiser, person_parser, request)
     result = view.post()
 
-    person_parser.parse.assert_called_once_with()
+    person_parser.parse.assert_called_once_with(view.schema)
     person_service.create.assert_called_once_with(parsed_person)
-    person_serialiser.serialise.assert_called_once_with(object_person)
+    person_serialiser.serialise.assert_called_once_with(view.schema, object_person)
     assert result == (serialised_person, 201)
