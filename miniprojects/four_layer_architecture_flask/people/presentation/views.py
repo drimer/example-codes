@@ -43,4 +43,4 @@ class PeopleListOrCreateView(JsonViewMixin, MethodView):
                 'message': 'Person already exists',
             }), 409
 
-        return self.person_serialiser.serialise(new_person)
+        return self.person_serialiser.serialise(new_person), 201

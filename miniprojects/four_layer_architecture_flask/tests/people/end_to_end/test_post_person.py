@@ -39,6 +39,7 @@ def test_create_new_person(flask_client, people):
         content_type='application/json',
     )
 
+    assert response.status_code == 201
     data = json.loads(response.get_data().decode('utf8'))
     assert data['first_name'] == post_data['first_name']
     assert data['phone_number'] == post_data['phone_number']

@@ -60,4 +60,4 @@ def test_post_creates_new_person(
     person_parser.parse.assert_called_once_with()
     person_service.create.assert_called_once_with(parsed_person)
     person_serialiser.serialise.assert_called_once_with(object_person)
-    assert result == serialised_person
+    assert result == (serialised_person, 201)
