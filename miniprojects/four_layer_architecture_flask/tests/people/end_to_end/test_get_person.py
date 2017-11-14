@@ -29,7 +29,10 @@ def people(test_db):
 
 
 def test_get_person_returns_all_people(flask_client, people):
-    response = flask_client.get('/person')
+    response = flask_client.get(
+        '/person',
+        content_type='application/json',
+    )
 
     expected_data = sorted(
         [
@@ -59,7 +62,10 @@ def test_get_person_returns_all_people(flask_client, people):
 def test_get_person_returns_empty_list_when_no_records(test_db, flask_client):
     del test_db
 
-    response = flask_client.get('/person')
+    response = flask_client.get(
+        '/person',
+        content_type='application/json',
+    )
 
     actual_data = json.loads(response.get_data().decode('utf8'))
 

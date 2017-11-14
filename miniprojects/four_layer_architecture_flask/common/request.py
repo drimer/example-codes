@@ -10,3 +10,6 @@ class Request(object):
 
     def method_is(self, method: str) -> bool:
         return request.method == method
+
+    def is_json(self):
+        return request.headers.get('Content-Type') == 'application/json'
