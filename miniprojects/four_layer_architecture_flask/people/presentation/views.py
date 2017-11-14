@@ -1,10 +1,11 @@
+from flask.json import jsonify
 from flask.views import MethodView
 from injector import inject
 
 from common.request import Request
 from common.views import JsonViewMixin
 from people.application.services import PersonService
-from people.presentation.parsers import PersonParser
+from people.presentation.parsers import PersonParser, ParserError
 from people.presentation.serialisers import PersonSerialiser
 
 
@@ -27,6 +28,13 @@ class PeopleListOrCreateView(JsonViewMixin, MethodView):
         return self.person_serialiser.serialise(person_results, many=True)
 
     def post(self):
-        person_json = self.person_parser.parse()
+        try:
+            person_json = self.person_parser.parse()
+        except ParserError as exc:
+            return jsonify({
+                'message': 'Error occurred while parsing data received.',
+                'errors': [exc.message],
+            }), 400
+
         new_person = self.person_service.create(person_json)
         return self.person_serialiser.serialise(new_person)

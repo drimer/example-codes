@@ -1,8 +1,14 @@
-from flask import jsonify
 from injector import inject
 
 from common.request import Request
 from people.presentation.schemas import PersonSchema
+
+
+class ParserError(Exception):
+    def __init__(self, message, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+
+        self.message = message
 
 
 class PersonParser(object):
@@ -13,15 +19,9 @@ class PersonParser(object):
 
     def parse(self) -> object:
         json = self.request.get_json()
-        if not json:
-            return jsonify({
-                'message': 'Json data not received',
-            }), 400
         json_data, errors = self.schema.load(json)
+
         if errors:
-            return jsonify({
-                'message': 'BadRequest',
-                'errors': errors,
-            }), 400
+            raise ParserError(str(errors))
 
         return json_data

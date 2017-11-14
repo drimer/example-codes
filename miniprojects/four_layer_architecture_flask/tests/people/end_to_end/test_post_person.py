@@ -49,3 +49,15 @@ def test_create_new_person(flask_client, people):
 def test_create_endpoint_only_takes_json_requests(flask_client):
     response = flask_client.post('/person', data={})
     assert response.status_code == 415
+
+
+def test_create_endpoint_returns_400_when_request_is_incorrect(flask_client):
+    post_data = {'incorrect_field': 'incorrect data'}
+    response = flask_client.post(
+        '/person',
+        data=post_data,
+        content_type='application/json',
+    )
+
+    data = json.loads(response.get_data().decode('utf8'))
+    assert 'errors' in data
