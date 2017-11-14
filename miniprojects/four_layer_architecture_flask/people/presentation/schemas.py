@@ -1,11 +1,12 @@
 from marshmallow import Schema, fields
 
 
-def phone_number_validator(phone_number):
+def phone_number_validator(phone_number) -> bool:
     """
     Validation for phone numbers. Dull function that just serves as an
     example. It should return False if the value isn't a valid phone number.
     """
+    del phone_number
     return True
 
 

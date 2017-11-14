@@ -11,7 +11,7 @@ class PersonParser(object):
         self.schema = person_schema
         self.request = request
 
-    def parse(self):
+    def parse(self) -> object:
         json = self.request.get_json()
         if not json:
             return jsonify({

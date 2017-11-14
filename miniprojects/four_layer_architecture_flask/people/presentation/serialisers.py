@@ -9,5 +9,5 @@ class PersonSerialiser(object):
     def __init__(self, schema: PersonSchema):
         self.schema = schema
 
-    def serialise(self, person, many=None):
+    def serialise(self, person, many=None) -> str:
         return jsonify(self.schema.dump(person, many=many).data)
