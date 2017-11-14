@@ -36,5 +36,11 @@ class PeopleListOrCreateView(JsonViewMixin, MethodView):
                 'errors': [exc.message],
             }), 400
 
-        new_person = self.person_service.create(person_json)
+        try:
+            new_person = self.person_service.create(person_json)
+        except PersonService.AlreadyExists:
+            return jsonify({
+                'message': 'Person already exists',
+            }), 409
+
         return self.person_serialiser.serialise(new_person)

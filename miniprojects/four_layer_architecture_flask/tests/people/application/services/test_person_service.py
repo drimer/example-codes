@@ -54,7 +54,7 @@ def test_that_create_creates_new_person(
     assert result == new_db_entity
 
 
-def test_that_create_does_not_create_peson_when_phone_is_taken(
+def test_that_create_does_not_create_person_when_phone_is_taken(
         db_interface, person_repository,
 ):
     new_person_data = {
@@ -64,6 +64,6 @@ def test_that_create_does_not_create_peson_when_phone_is_taken(
     person_repository.get_count.return_value = 1
 
     service = PersonService(db_interface, person_repository)
-    result = service.create(new_person_data)
 
-    assert result is None
+    with pytest.raises(PersonService.AlreadyExists):
+        service.create(new_person_data)

@@ -7,6 +7,9 @@ from people.application.repositories import PersonRepository
 
 
 class PersonService(object):
+    class AlreadyExists(Exception):
+        pass
+
     @inject
     def __init__(self, db: DatabaseInterface, repository: PersonRepository):
         self.db = db
@@ -14,7 +17,7 @@ class PersonService(object):
 
     def create(self, data):
         if self.repository.get_count(phone_number=data['phone_number']):
-            return None
+            raise PersonService.AlreadyExists()
 
         entity = self.repository.create(
             first_name=data['first_name'],

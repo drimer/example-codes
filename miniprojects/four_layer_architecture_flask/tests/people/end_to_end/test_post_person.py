@@ -61,3 +61,17 @@ def test_create_endpoint_returns_400_when_request_is_incorrect(flask_client):
 
     data = json.loads(response.get_data().decode('utf8'))
     assert 'errors' in data
+
+
+def test_create_endpoint_returns_409_when_person_already_exists(flask_client, people):
+    post_data = {
+        'first_name': people[0].first_name,
+        'phone_number': people[0].phone_number,
+    }
+    response = flask_client.post(
+        '/person',
+        data=json.dumps(post_data),
+        content_type='application/json',
+    )
+
+    assert response.status_code == 409
