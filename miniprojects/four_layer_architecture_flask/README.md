@@ -13,7 +13,7 @@ Running the app
 Running the tests
 =================
 
-- `pytest`
+- `PYTHONPATH=.:$PYTHONPATH pytest`
 
 How to use the app
 ==================
